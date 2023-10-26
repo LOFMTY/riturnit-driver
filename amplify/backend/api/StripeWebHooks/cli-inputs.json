@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "paths": {
+    "/stripe-webhooks": {
+      "name": "/stripe-webhooks",
+      "lambdaFunction": "StripeWebHooks",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/StripeIdentityHook": {
+      "name": "/StripeIdentityHook",
+      "lambdaFunction": "StriipeIdentityHook",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

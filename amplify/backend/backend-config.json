@@ -1,0 +1,236 @@
+{
+  "api": {
+    "StripeWebHooks": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "StripeWebHooks"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "StriipeIdentityHook"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
+    "riturnit": {
+      "dependsOn": [],
+      "output": {
+        "authConfig": {
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AWS_IAM"
+            }
+          ],
+          "defaultAuthentication": {
+            "apiKeyConfig": {
+              "apiKeyExpirationDate": "2023-08-11T22:45:29.149Z",
+              "apiKeyExpirationDays": 60,
+              "description": "riturniT"
+            },
+            "authenticationType": "API_KEY"
+          }
+        }
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "AppSync"
+    }
+  },
+  "auth": {
+    "RITURNIT": {
+      "customAuth": false,
+      "dependsOn": [
+        {
+          "attributes": [
+            "Arn",
+            "Name"
+          ],
+          "category": "function",
+          "resourceName": "RITURNITPostConfirmation",
+          "triggerProvider": "Cognito"
+        }
+      ],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "NAME",
+          "EMAIL"
+        ],
+        "socialProviders": [
+          "GOOGLE"
+        ],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito"
+    }
+  },
+  "function": {
+    "CreateStripePayment": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "RITURNITPostConfirmation": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ],
+          "category": "api",
+          "resourceName": "riturnit"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "StriipeIdentityHook": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "StripeIdentity": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "StripeWebHooks": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_CreateStripePayment_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "CreateStripePayment"
+        }
+      ]
+    },
+    "AMPLIFY_function_CreateStripePayment_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "CreateStripePayment"
+        }
+      ]
+    },
+    "AMPLIFY_function_RITURNITPostConfirmation_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "RITURNITPostConfirmation"
+        }
+      ]
+    },
+    "AMPLIFY_function_RITURNITPostConfirmation_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "RITURNITPostConfirmation"
+        }
+      ]
+    },
+    "AMPLIFY_function_StriipeIdentityHook_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "StriipeIdentityHook"
+        }
+      ]
+    },
+    "AMPLIFY_function_StriipeIdentityHook_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "StriipeIdentityHook"
+        }
+      ]
+    },
+    "AMPLIFY_function_StripeIdentity_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "StripeIdentity"
+        }
+      ]
+    },
+    "AMPLIFY_function_StripeIdentity_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "StripeIdentity"
+        }
+      ]
+    },
+    "AMPLIFY_function_StripeWebHook_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "StripeWebHook"
+        }
+      ]
+    },
+    "AMPLIFY_function_StripeWebHook_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "StripeWebHook"
+        }
+      ]
+    },
+    "AMPLIFY_function_StripeWebHooks_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "StripeWebHooks"
+        }
+      ]
+    },
+    "AMPLIFY_function_StripeWebHooks_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "StripeWebHooks"
+        }
+      ]
+    }
+  },
+  "storage": {
+    "s36601dd13": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "S3"
+    }
+  }
+}

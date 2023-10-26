@@ -1,0 +1,310 @@
+type Mutation {
+  CreateStripePayment(
+    amount: Int!
+    email: String!
+    name: String!
+    phone: String
+  ): PaymentIntent! @function(name: "CreateStripePayment-${env}")
+  StripeIdentity(customerId: ID!): StripeIdentitySession!
+    @function(name: "StripeIdentity-${env}")
+}
+
+type PaymentIntent @model @auth(rules: [{allow: public}]) {
+  clientSecret: String!
+  ephemeralKey: String!
+  customer: String!
+  setupIntent: String!
+}
+
+type StripeIdentitySession @model @auth(rules: [{allow: public}]) {
+  ephemeralKeySecret: String!
+  verificationSessionId: String!
+}
+
+type RiturnitFees @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  rideBasePay: Float!
+  serviceFee: Float!
+  discountFee: Float!
+}
+
+type Rating @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  rating: Int
+  comment: String
+  driver_image: String
+  driver_name: String
+  customer_name: String
+  customer_image: String
+
+  tripsID: ID! @index(name: "byTrips")
+  driverID: ID! @index(name: "byDriver")
+  userID: ID! @index(name: "byUser")
+}
+
+type RiturnitContactUs @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  contactUsImage: String!
+  introDescription: String!
+  BuildingNumber: String!
+  StreetName: String!
+  CityName: String!
+  AreaOrState: String!
+  PostalCode: Int!
+  ContactNumber: AWSPhone!
+  EmailAddress: AWSEmail!
+  FacebookURL: String
+  TikTok: String
+  Twitter: String
+  Instagram: String
+}
+
+type RiturnitPoint @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  points: Int!
+}
+
+type RiturnitCancelTripReason @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  label: String!
+}
+
+type Points @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  amount: Int!
+  store_name: String!
+  store_image: String
+
+  userID: ID! @index(name: "byUser")
+  storeID: ID! @index(name: "byStore")
+}
+
+type Car @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  model: String!
+  make: String!
+  year: Int!
+  plate_number: String!
+  color: String!
+
+  driverID: ID! @index(name: "byDriver")
+}
+
+type Payment @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  customer_name: String
+  email: String!
+  address: String
+  phone_number: String!
+  total_amount: Float!
+  payment_method: String
+  payment_status: String
+
+  userID: ID! @index(name: "byUser")
+}
+
+type DriverWallet @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  amount: Float!
+
+  driverID: ID! @index(name: "byDriver")
+}
+
+type Receipt @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  image: String!
+  store_name: String!
+
+  userID: ID! @index(name: "byUser")
+  storeID: ID! @index(name: "byStore")
+}
+
+type TripCart @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  expiry_date: AWSDate!
+  name: String!
+  image: String!
+  quantity: Int!
+  price: Float!
+  description: String
+
+  storeID: ID! @index(name: "byStore")
+  userID: ID! @index(name: "byUser")
+  tripsID: ID! @index(name: "byTrips")
+}
+
+enum TripStatus {
+  NEW
+  ACCEPTED
+  PICKED_UP
+  COMPLETED
+  CANCELED
+}
+
+type Trips @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  trip_status: TripStatus
+  pickup_lat: String
+  pickup_lng: String
+  dropoff_lat: String
+  dropoff_lng: String
+  pickup_location_description: String
+  dropoff_location_description: String
+  trip_cost: Float
+  TotalQtyItems: Int
+  receipt: String
+  duration: Float
+  distance: Float
+  store_name: String
+  store_image: String
+  user_name: String
+  user_photo: String
+  mobile_number: String
+  driver_name: String
+  driver_photo: String
+  driver_rating: Float
+  driver_mobile_number: String
+  driver_car_model: String
+  driver_car_make: String
+  driver_car_color: String
+  driver_car_plate_number: String
+  sub_total: Float
+  redeem_points: Int
+  service_fee: Float
+  delivery_fee: Float
+  delivery_discount: Float
+  sum_total: Float
+
+  Driver: Driver @hasOne
+  userID: ID @index(name: "byUser")
+  storeID: ID! @index(name: "byStore")
+  TripCarts: [TripCart] @hasMany(indexName: "byTrips", fields: ["id"])
+  Ratings: [Rating] @hasMany(indexName: "byTrips", fields: ["id"])
+}
+
+type Store @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String!
+  image: String!
+  description: String
+  expiryDays: Int!
+  # expiryDaysDescription: String!
+  # maximumWeight: Float!
+  # maximumWeightDescription: String!
+
+  Points: [Points] @hasMany(indexName: "byStore", fields: ["id"])
+  Products: [Product] @hasMany(indexName: "byStore", fields: ["id"])
+  Receipts: [Receipt] @hasMany(indexName: "byStore", fields: ["id"])
+  TripCarts: [TripCart] @hasMany(indexName: "byStore", fields: ["id"])
+  Trips: [Trips] @hasMany(indexName: "byStore", fields: ["id"])
+}
+
+type Product @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String!
+  image: String!
+  quantity: Int!
+  price: Float!
+  description: String
+  expiry_date: AWSDate!
+
+  userID: ID! @index(name: "byUser")
+  storeID: ID! @index(name: "byStore")
+
+  User: User @belongsTo(fields: ["userID"])
+  Store: Store @belongsTo(fields: ["storeID"])
+}
+
+type User @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String!
+  email: String!
+  image: String
+  phone_number: String
+  home_address: String
+  work_address: String
+  inviteCode: String
+  lng: String
+  lat: String
+
+  Ratings: [Rating] @hasMany(indexName: "byUser", fields: ["id"])
+  Receipts: [Receipt] @hasMany(indexName: "byUser", fields: ["id"])
+  Payments: [Payment] @hasMany(indexName: "byUser", fields: ["id"])
+  Products: [Product] @hasMany(indexName: "byUser", fields: ["id"])
+  Points: [Points] @hasMany(indexName: "byUser", fields: ["id"])
+  Trips: [Trips] @hasMany(indexName: "byUser", fields: ["id"])
+  TripCarts: [TripCart] @hasMany(indexName: "byUser", fields: ["id"])
+
+  fcmToken: String
+}
+
+type Driver @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String!
+  email: String!
+  image: String
+  phone_number: String
+  rating: Float
+  inviteCode: String
+  lng: String
+  lat: String
+  verificationStatus: DriverRegistrationStatus
+  onlineStatus: Boolean
+
+  Cars: [Car] @hasMany(indexName: "byDriver", fields: ["id"])
+  Ratings: [Rating] @hasMany(indexName: "byDriver", fields: ["id"])
+  DriverWallets: [DriverWallet] @hasMany(indexName: "byDriver", fields: ["id"])
+  LicenseDocuments: [LicenseDocument]
+    @hasMany(indexName: "byDriver", fields: ["id"])
+  RegistrationDocuments: [RegistrationDocument]
+    @hasMany(indexName: "byDriver", fields: ["id"])
+  InsuranceDocuments: [InsuranceDocument]
+    @hasMany(indexName: "byDriver", fields: ["id"])
+
+  fcmToken: String
+}
+
+enum DriverRegistrationStatus {
+  NEW
+  COMPLETE
+  REJECTED
+}
+
+type LicenseDocument @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  image: String
+  name: String
+  expiry_date: String
+
+  driverID: ID! @index(name: "byDriver")
+}
+
+type RegistrationDocument @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  image: String
+  name: String
+  expiry_date: String
+
+  driverID: ID! @index(name: "byDriver")
+}
+
+type InsuranceDocument @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  image: String
+  name: String
+  expiry_date: String
+
+  driverID: ID! @index(name: "byDriver")
+}
+
+type SystemNotification @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String
+  message: String
+}
+
+type DriverSystemNotification @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String!
+  message: String!
+}

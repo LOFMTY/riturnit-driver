@@ -1,0 +1,54 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-riturnit-staging-74549-authRole",
+      "UnauthRoleArn": "arn:aws:iam::948075589612:role/amplify-riturnit-staging-74549-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::948075589612:role/amplify-riturnit-staging-74549-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-riturnit-staging-74549-deployment",
+      "UnauthRoleName": "amplify-riturnit-staging-74549-unauthRole",
+      "StackName": "amplify-riturnit-staging-74549",
+      "StackId": "arn:aws:cloudformation:us-east-1:948075589612:stack/amplify-riturnit-staging-74549/6a727680-b997-11ed-92a2-1236ffa096a1",
+      "AmplifyAppId": "d1d09e4lv2qgcb",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-riturnit-staging-74549-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+    },
+    "categories": {
+      "auth": {
+        "RITURNIT": {}
+      },
+      "storage": {
+        "s36601dd13": {}
+      },
+      "function": {
+        "CreateStripePayment": {
+          "deploymentBucketName": "amplify-riturnit-staging-74549-deployment",
+          "s3Key": "amplify-builds/CreateStripePayment-443733754c7a50367971-build.zip"
+        },
+        "RITURNITPostConfirmation": {
+          "deploymentBucketName": "amplify-riturnit-staging-74549-deployment",
+          "s3Key": "amplify-builds/RITURNITPostConfirmation-45624c6b5a6d5a587650-build.zip"
+        },
+        "StripeWebHook": {
+          "deploymentBucketName": "amplify-riturnit-staging-74549-deployment",
+          "s3Key": "amplify-builds/StripeWebHook-41662f365a3844587543-build.zip"
+        },
+        "StripeIdentity": {
+          "deploymentBucketName": "amplify-riturnit-staging-74549-deployment",
+          "s3Key": "amplify-builds/StripeIdentity-666b767543424246556b-build.zip"
+        },
+        "StripeWebHooks": {
+          "deploymentBucketName": "amplify-riturnit-staging-74549-deployment",
+          "s3Key": "amplify-builds/StripeWebHooks-6644442b61736a31736c-build.zip"
+        },
+        "StriipeIdentityHook": {
+          "deploymentBucketName": "amplify-riturnit-staging-74549-deployment",
+          "s3Key": "amplify-builds/StriipeIdentityHook-616e4e4574366a715453-build.zip"
+        }
+      },
+      "api": {
+        "riturnit": {},
+        "StripeWebHooks": {}
+      }
+    }
+  }
+}

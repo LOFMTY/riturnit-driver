@@ -1,0 +1,6 @@
+{
+  "AppSyncApiName": "riturnit",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthModeLastUpdated": "2023-06-12T22:45:42.804Z"
+}
