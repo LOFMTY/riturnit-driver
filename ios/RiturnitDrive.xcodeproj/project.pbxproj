@@ -23,7 +23,6 @@
 		5D5EDE532A2F68FD00F592BA /* Inter-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D5EDE4A2A2F68FD00F592BA /* Inter-Thin.ttf */; };
 		5D5EDE542A2F68FD00F592BA /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D5EDE4B2A2F68FD00F592BA /* Inter-Bold.ttf */; };
 		5D5EDE552A2F68FD00F592BA /* Inter-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D5EDE4C2A2F68FD00F592BA /* Inter-Black.ttf */; };
-		5DDE05C82A54D7410073ED90 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 5DDE05C72A54D7410073ED90 /* main.jsbundle */; };
 		7C7D441DFF1B3FECFEAB2542 /* libPods-RiturnitDrive.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CE28E2E8041EB9224EEC908 /* libPods-RiturnitDrive.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		D565A79248C950C70CCF63AC /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99354B8D7F9B4C9227EC7166 /* ExpoModulesProvider.swift */; };
@@ -80,7 +79,6 @@
 		5D810BC429A5413A00A5AAF0 /* Zocial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Zocial.ttf; path = ../src/assets/fonts/Zocial.ttf; sourceTree = "<group>"; };
 		5D810BC629A5413A00A5AAF0 /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Octicons.ttf; path = ../src/assets/fonts/Octicons.ttf; sourceTree = "<group>"; };
 		5D810BC729A5413A00A5AAF0 /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Entypo.ttf; path = ../src/assets/fonts/Entypo.ttf; sourceTree = "<group>"; };
-		5DDE05C72A54D7410073ED90 /* main.jsbundle */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = RiturnitDrive/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8CE28E2E8041EB9224EEC908 /* libPods-RiturnitDrive.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RiturnitDrive.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		99354B8D7F9B4C9227EC7166 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-RiturnitDrive/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
@@ -160,7 +158,6 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				5DDE05C72A54D7410073ED90 /* main.jsbundle */,
 				5D5EDE4C2A2F68FD00F592BA /* Inter-Black.ttf */,
 				5D5EDE4B2A2F68FD00F592BA /* Inter-Bold.ttf */,
 				5D5EDE492A2F68FD00F592BA /* Inter-ExtraBold.ttf */,
@@ -334,7 +331,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5DDE05C82A54D7410073ED90 /* main.jsbundle in Resources */,
 				5D5EDE4D2A2F68FD00F592BA /* Inter-Medium.ttf in Resources */,
 				5D5EDE4E2A2F68FD00F592BA /* Inter-ExtraLight.ttf in Resources */,
 				5D5EDE4F2A2F68FD00F592BA /* Inter-Regular.ttf in Resources */,
